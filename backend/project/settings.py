@@ -27,8 +27,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'django_filters',
     'drf_yasg',
     'corsheaders',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +150,8 @@ REST_FRAMEWORK = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+AUTH_USER_MODEL = 'api.User'
+
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'Token': {
@@ -155,5 +159,12 @@ SWAGGER_SETTINGS = {
             'name': 'Authorization',
             'in': 'header'
         }
+    }
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user': 'api.serializers.UserCustomSerializer',
+        'current_user': 'api.serializers.UserCustomSerializer',
     }
 }
