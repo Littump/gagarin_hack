@@ -1,5 +1,5 @@
-from django_filters.rest_framework import FilterSet, CharFilter
 from api.models import Event
+from django_filters.rest_framework import CharFilter, FilterSet
 
 
 class EventFilter(FilterSet):

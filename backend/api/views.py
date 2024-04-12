@@ -1,15 +1,12 @@
-from drf_yasg.utils import swagger_auto_schema
-from rest_framework.decorators import action
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
-from rest_framework import status
-from django_filters.rest_framework import DjangoFilterBackend
-
-from api.serializers import EventSerializer, AchievementSerializer, PointUpSerializer, ServiceSerializer
-from api.models import Event, Achievement, PointUp, Service
-from reducers.event_reducer import EventReducer
-from project.logger import get_logger
 from api.filters import EventFilter
+from api.models import Achievement, Event, PointUp, Service
+from api.serializers import (AchievementSerializer, EventSerializer,
+                             PointUpSerializer, ServiceSerializer)
+from django_filters.rest_framework import DjangoFilterBackend
+from project.logger import get_logger
+from reducers.event_reducer import EventReducer
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 
 class EventViewSet(ModelViewSet):

@@ -8,15 +8,13 @@ from django.db.models import Model
 from django.forms.models import model_to_dict
 from google.protobuf.struct_pb2 import Struct
 from google.protobuf.timestamp_pb2 import Timestamp
+from project import config
 from yandex.cloud.logging.v1.log_entry_pb2 import (Destination,
                                                    IncomingLogEntry, LogLevel)
 from yandex.cloud.logging.v1.log_ingestion_service_pb2 import WriteRequest
 from yandex.cloud.logging.v1.log_ingestion_service_pb2_grpc import \
     LogIngestionServiceStub
 from yandex.cloud.logging.v1.log_resource_pb2 import LogEntryResource
-
-from project import config
-
 
 _CLOUD_LOGLEVEL = {
     'LEVEL_UNSPECIFIED': LogLevel.Level.LEVEL_UNSPECIFIED,
