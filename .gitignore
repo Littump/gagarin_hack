@@ -1,0 +1,5 @@
+backend/venv
+backend/.env
+backend/static
+*.DS_Store
+backend/db.sqlite3
