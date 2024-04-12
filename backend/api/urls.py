@@ -1,13 +1,25 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-# from api.views import ApiViewSet
-
-
-app_name = 'api'
+from api import views
 
 v1_router = DefaultRouter()
-# v1_router.register('', ApiViewSet, basename=app_name)
+
+v1_router.register('events',
+                   views.EventViewSet,
+                   basename='events')
+
+v1_router.register('achievements',
+                   views.AchievementViewSet,
+                   basename='achievements')
+
+v1_router.register('pointups',
+                   views.PointUpViewSet,
+                   basename='pointups')
+
+v1_router.register('services',
+                   views.ServiceViewSet,
+                   basename='services')
 
 urlpatterns = [
     path('', include('djoser.urls')),
