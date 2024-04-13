@@ -70,6 +70,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class TestSerializer(serializers.ModelSerializer):
+    is_complete = SerializerMethodField()
+    percentage = SerializerMethodField()
     questions = SerializerMethodField()
 
     class Meta:
@@ -78,3 +80,32 @@ class TestSerializer(serializers.ModelSerializer):
 
     def get_questions(self, obj):
         return QuestionSerializer(obj.questions.all(), many=True).data
+
+    def get_is_complete(self, obj):
+        result = models.UserTest.objects.filter(
+            user=self.context['request'].user,
+            test=obj,
+        )
+        if result:
+            return result[0].is_complete
+        return False
+
+    def get_percentage(self, obj):
+        result = models.UserTest.objects.filter(
+            user=self.context['request'].user,
+            test=obj,
+        )
+        if result:
+            return result[0].percentage
+        return 0
+
+
+class UserTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserTest
+        exclude = ['user']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return models.UserTest.objects.create(**validated_data)

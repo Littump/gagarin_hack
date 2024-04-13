@@ -28,6 +28,10 @@ v1_router.register('tests',
                    views.TestViewSet,
                    basename='tests')
 
+v1_router.register('results',
+                   views.UserTestViewSet,
+                   basename='results')
+
 urlpatterns = [
     path('', include('djoser.urls')),
     path("auth/", include("djoser.urls.authtoken")),

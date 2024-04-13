@@ -65,3 +65,12 @@ class Question(models.Model):
     is_answer = models.BooleanField()
     test = models.ForeignKey(Test, on_delete=models.CASCADE,
                              related_name='questions')
+
+
+class UserTest(models.Model):
+    is_complete = models.BooleanField(default=False)
+    percentage = models.IntegerField(default=0)
+    test = models.ForeignKey(Test, on_delete=models.CASCADE,
+                             related_name='user_test')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name='user_test')
