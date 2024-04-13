@@ -20,6 +20,7 @@ jobs:
       - name: Install dependencies for Python
         run: |
           pip install -r backend/requirements.txt
+          pip install -r backend/requirements_model.txt
 
   build_and_push_to_docker_hub:
     name: Build and push docker image to docker hub
