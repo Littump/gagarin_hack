@@ -4,7 +4,7 @@ from django.db import models
 
 class Event(models.Model):
     name = models.CharField(max_length=255)
-    avatar = models.ImageField(upload_to='events/')
+    avatar = models.ImageField(upload_to='events/', blank=True, null=True)
     description = models.TextField()
     date_start = models.DateField()
     date_finish = models.DateField()
@@ -31,7 +31,7 @@ class User(AbstractUser):
 
 class Achievement(models.Model):
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='achievements/')
+    image = models.ImageField(upload_to='achievements/', blank=True, null=True)
     date_start = models.DateField()
     date_finish = models.DateField()
     place = models.CharField(max_length=255)
@@ -51,7 +51,7 @@ class PointUp(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to='services/')
+    image = models.ImageField(upload_to='services/', blank=True, null=True)
     link = models.URLField()
 
 

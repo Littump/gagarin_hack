@@ -13,7 +13,7 @@ class EventSerializer(serializers.ModelSerializer):
 class AchievementSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Achievement
-        fields = '__all__'
+        exclude = ['user']
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -24,7 +24,7 @@ class AchievementSerializer(serializers.ModelSerializer):
 class PointUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PointUp
-        fields = '__all__'
+        exclude = ['user']
 
     def create(self, validated_data):
         user = self.context['request'].user
