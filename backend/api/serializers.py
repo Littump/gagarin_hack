@@ -61,3 +61,20 @@ class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Service
         fields = '__all__'
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Question
+        fields = '__all__'
+
+
+class TestSerializer(serializers.ModelSerializer):
+    questions = SerializerMethodField()
+
+    class Meta:
+        model = models.Test
+        fields = '__all__'
+
+    def get_questions(self, obj):
+        return QuestionSerializer(obj.questions.all(), many=True).data

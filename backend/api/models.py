@@ -38,7 +38,7 @@ class Achievement(models.Model):
     link = models.URLField()
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE,
-                                related_name='achievements')
+                             related_name='achievements')
 
 
 class PointUp(models.Model):
@@ -53,3 +53,15 @@ class Service(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='services/')
     link = models.URLField()
+
+
+class Test(models.Model):
+    name = models.CharField(max_length=255)
+
+
+class Question(models.Model):
+    text = models.TextField()
+    number = models.IntegerField()
+    is_answer = models.BooleanField()
+    test = models.ForeignKey(Test, on_delete=models.CASCADE,
+                             related_name='questions')
