@@ -1,10 +1,12 @@
+from reducers.base import BaseReducer
 from langchain.llms import Ollama
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
+from project.config import OLLAMA_URL
 
 
-class ChatBot:
-    def __init__(self, ollama_url: str, model: str, temperature: float = 0):
+class ChatBotReducer(metaclass=BaseReducer):
+    def __init__(self, ollama_url: str = OLLAMA_URL, model: str = 'mistral', temperature: float = 0):
         self.llm = Ollama(base_url=ollama_url, model=model, temperature=temperature)
         template = """<s>Ты умный чат-бот для помощи студентам. Если не знаешь 
         ответа, напиши, что не знаешь. Не пиши ничего лишнего. Отвечай только на 
