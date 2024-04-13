@@ -28,8 +28,7 @@ class ModelReducer(metaclass=BaseReducer):
         cos_sims = util.pytorch_cos_sim(embeddings, user_emb).tolist()
         posts = {}
         for i in range(len(cos_sims)):
-            posts[i + 1] = cos_sims[i]
+            posts[i] = cos_sims[i]
 
-        k = 10
-        topk_posts = sorted(posts.items(), key=lambda x: x[1], reverse=True)[:k]
+        topk_posts = sorted(posts.items(), key=lambda x: x[1], reverse=True)
         return topk_posts
