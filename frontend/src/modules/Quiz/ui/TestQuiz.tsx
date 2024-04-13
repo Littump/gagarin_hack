@@ -49,6 +49,7 @@ const TestQuiz = () => {
               //мутация
               const answers: string[][] = [];
               for (const key in values) {
+                // @ts-ignore
                 answers.push(values[key] as string[]);
               }
               const result = countResult(quizzes, answers);
