@@ -32,6 +32,10 @@ v1_router.register('results',
                    views.UserTestViewSet,
                    basename='results')
 
+v1_router.register('variants',
+                   views.VariantQuestionViewSet,
+                   basename='variants')
+
 urlpatterns = [
     path('', include('djoser.urls')),
     path("auth/", include("djoser.urls.authtoken")),

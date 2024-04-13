@@ -63,10 +63,21 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class VariantQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.VariantQuestion
+        fields = '__all__'
+
+
 class QuestionSerializer(serializers.ModelSerializer):
+    variants = SerializerMethodField()
+
     class Meta:
         model = models.Question
         fields = '__all__'
+
+    def get_variants(self, obj):
+        return VariantQuestionSerializer(obj.variants.all(), many=True).data
 
 
 class TestSerializer(serializers.ModelSerializer):

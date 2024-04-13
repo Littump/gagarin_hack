@@ -1,10 +1,10 @@
 from api.filters import EventFilter
 from api.models import (Achievement, Event, PointUp, Question,
-                        Service, Test, UserTest)
+                        Service, Test, UserTest, VariantQuestion)
 from api.serializers import (AchievementSerializer, EventSerializer,
                              PointUpSerializer, QuestionSerializer,
                              ServiceSerializer, TestSerializer,
-                             UserTestSerializer)
+                             UserTestSerializer, VariantQuestionSerializer)
 from django_filters.rest_framework import DjangoFilterBackend
 from project.logger import get_logger
 from reducers.event_reducer import EventReducer
@@ -63,3 +63,9 @@ class UserTestViewSet(ModelViewSet):
     serializer_class = UserTestSerializer
     queryset = UserTest.objects.all()
     logger = get_logger('UserTestViewSet')
+
+
+class VariantQuestionViewSet(ModelViewSet):
+    serializer_class = VariantQuestionSerializer
+    queryset = VariantQuestion.objects.all()
+    logger = get_logger('VariantQuestionViewSet')

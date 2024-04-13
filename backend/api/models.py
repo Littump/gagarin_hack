@@ -63,9 +63,15 @@ class Test(models.Model):
 class Question(models.Model):
     text = models.TextField()
     number = models.IntegerField()
-    is_answer = models.BooleanField()
     test = models.ForeignKey(Test, on_delete=models.CASCADE,
                              related_name='questions')
+
+
+class VariantQuestion(models.Model):
+    text = models.TextField()
+    is_answer = models.BooleanField()
+    question = models.ForeignKey(Question, on_delete=models.CASCADE,
+                                 related_name='variants')
 
 
 class UserTest(models.Model):
