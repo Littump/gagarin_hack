@@ -11,7 +11,7 @@ class Event(models.Model):
     place = models.CharField(max_length=255)
     points = models.IntegerField()
     link = models.URLField()
-    embeding_vector = models....
+    # embeding_vector = models....
 
     KIND_CHOICES = (
         ('event', 'event'),
