@@ -1,13 +1,22 @@
 from api import models
 from djoser.serializers import UserSerializer
+from reducers.model_reducer import ModelReducer
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 
 
 class EventSerializer(serializers.ModelSerializer):
+    model_reducer = ModelReducer()
+
     class Meta:
         model = models.Event
         fields = '__all__'
+
+    def create(self, validated_data):
+        text = validated_data['name'] + ' ' + validated_data['description']
+        embeding_vector = self.model_reducer.get_embedding(text)
+        validated_data['embeding_vector'] = embeding_vector
+        return models.Event.objects.create(**validated_data)
 
 
 class AchievementSerializer(serializers.ModelSerializer):
@@ -120,3 +129,7 @@ class UserTestSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['user'] = user
         return models.UserTest.objects.create(**validated_data)
+
+
+class QAQustionSerializer(serializers.ModelSerializer):
+    text = serializers.CharField(max_length=2047)

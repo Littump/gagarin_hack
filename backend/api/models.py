@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -11,7 +13,7 @@ class Event(models.Model):
     place = models.CharField(max_length=255)
     points = models.IntegerField()
     link = models.URLField()
-    # embeding_vector = models....
+    embeding_vector = models.CharField(max_length=2047, blank=True, null=True)
 
     KIND_CHOICES = (
         ('event', 'event'),
@@ -23,6 +25,12 @@ class Event(models.Model):
 
     class Meta:
         ordering = ['-date_start']
+
+    def set_embeding_vector(self, vector):
+        self.embeding_vector = json.dumps(vector)
+
+    def get_embeding_vector(self):
+        return json.loads(self.embeding_vector)
 
 
 class User(AbstractUser):
