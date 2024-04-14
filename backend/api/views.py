@@ -1,3 +1,5 @@
+import json
+
 from api.filters import EventFilter
 from api.models import (Achievement, Event, PointUp, Question, Service, Test,
                         UserTest, VariantQuestion)
@@ -36,17 +38,23 @@ class EventViewSet(ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def priority_list(self, request):
-        user = self.context['request'].user
+        user = request.user
         achievements = user.achievements.all()
+        if not achievements:
+            return self.list(request)
         text_achievements = ' '.join([ach.name + ' ' + ach.description
                                       for ach in achievements])
         events = Event.objects.all().order_by('id')
-        embeding_vectors = [event.embeding_vector for event in events]
+        small_id = events[0].id
+        embeding_vectors = [json.loads(event.embeding_vector) for event in events]
         result_ids_event = (self.model_reducer
                             .similarity_search(text_achievements,
                                                embeding_vectors))
-        events = events.filter(id__in=result_ids_event)
-        serializer = EventSerializer(events, many=True)
+        result_events = [
+            Event.objects.get(id=event_id[0] + small_id)
+            for event_id in result_ids_event
+        ]
+        serializer = EventSerializer(result_events, many=True)
         return Response(serializer.data)
 
 

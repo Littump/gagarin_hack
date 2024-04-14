@@ -10,7 +10,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Event
-        fields = '__all__'
+        exclude = ['embeding_vector']
 
     def create(self, validated_data):
         text = validated_data['name'] + ' ' + validated_data['description']
@@ -131,5 +131,5 @@ class UserTestSerializer(serializers.ModelSerializer):
         return models.UserTest.objects.create(**validated_data)
 
 
-class QAQustionSerializer(serializers.ModelSerializer):
+class QAQustionSerializer(serializers.Serializer):
     text = serializers.CharField(max_length=2047)
