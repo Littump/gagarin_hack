@@ -20,7 +20,7 @@ class ModelReducer(metaclass=BaseReducer):
         self.model.eval()
 
     def get_embedding(self, text: str):
-        return self.model.encode(text, normalize_embeddings=True)
+        return list(self.model.encode(text, normalize_embeddings=True))
 
     def similarity_search(self, user_text: str, embeddings: list):
         embeddings = torch.tensor(np.array(embeddings).astype("float32"))
