@@ -63,12 +63,12 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSPHRASE }}
           script: |
-            cd site
+            cd gagarin
             sudo docker compose pull
             sudo docker compose down
             sudo docker compose up -d
-            sudo docker exec site-backend-1 python manage.py makemigrations
-            sudo docker exec site-backend-1 python manage.py migrate
+            sudo docker exec gagarin-backend-1 python manage.py makemigrations
+            sudo docker exec gagarin-backend-1 python manage.py migrate
 
   send_message_telegram:
     name: message in tg
