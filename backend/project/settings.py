@@ -50,7 +50,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:80",
     "http://127.0.0.1:8080",
-    # ...
+    "https://ithuboard.ru:80",
+    "https://ithuboard.ru:8080",
 ]
 
 ROOT_URLCONF = 'project.urls'
